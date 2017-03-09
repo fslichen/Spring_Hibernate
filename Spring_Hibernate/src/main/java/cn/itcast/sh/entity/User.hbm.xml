@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.itcast.sh.entity">
+	<class name="User" table="USER_INFO">
+		<id name="id" column="U_ID">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="U_NAME" length="50"/>
+		<property name="age" column="U_AGE"/>
+	</class>
+</hibernate-mapping>
