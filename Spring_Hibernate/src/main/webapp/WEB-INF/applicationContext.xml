@@ -4,16 +4,14 @@
     xmlns:p="http://www.springframework.org/schema/p"
     xmlns:util="http://www.springframework.org/schema/util"
     xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        				http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-        				http://www.springframework.org/schema/util
-        				http://www.springframework.org/schema/util/spring-util-4.2.xsd
-        				http://www.springframework.org/schema/context
-        				http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-	
-	<!-- 配置属性占位符 -->
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	<!-- The properties file is located in src/main/resources. -->
 	<context:property-placeholder location="classpath:jdbc.properties"/>
-	<!-- 配置数据源 dataSource -->
+	<!-- Configure dataSource. -->
+	<!-- Don't forget to add maven dependency for c3p0. -->
+	<!-- p corresponds to setter injection. -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
 		p:driverClass="${driverClass}"
 		p:jdbcUrl="${jdbcUrl}"
@@ -23,17 +21,21 @@
 		p:maxPoolSize="${maxPoolSize}"
 		p:initialPoolSize="${initialPoolSize}"/>
 	
-	<!-- 配置SessionFactory (hibernate) -->
+	<!-- Configure hibernate session factory. -->
+	<!-- dataSource-ref stands for data source reference. -->
+	<!-- hibernate.cfg.xml is located under src/main/resources. -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 		p:dataSource-ref="dataSource"
 		p:configLocation="classpath:hibernate.cfg.xml"/>
 	
-	<!-- 配置Dao -->
+	<!-- Configure dao. -->
+	<!-- sessionFactory-ref stands for session factory reference. -->
 	<bean id="userDao" class="cn.itcast.sh.dao.admin.impl.UserDaoImpl"
 		p:sessionFactory-ref="sessionFactory"/>
 		
-	<!-- 配置业务层 -->
+	<!-- Configure service. -->
+	<!-- userDao-ref stands for userDao reference. -->
+	<!-- You might notice that AdminServiceImpl provides a setter method for userDao, which means p corresponds to setter method. -->
 	<bean id="adminService" class="cn.itcast.sh.service.impl.AdminServiceImpl"
 		p:userDao-ref="userDao"/>
-	
 </beans>
