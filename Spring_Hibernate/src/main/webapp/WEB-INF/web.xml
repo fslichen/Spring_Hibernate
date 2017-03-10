@@ -4,12 +4,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-  
-    <!-- 配置Spring的核心监听器，创建Spring容器  
- 		默认会找WEB-INF/applicationContext.xml
-     -->
+    
+    <!-- Configure spring core container. -->
+    <!-- Create spring container. -->
+    <!-- Look for applicationContext.xml under WEB-INF by default. -->
     <listener>
  		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
 </web-app>
