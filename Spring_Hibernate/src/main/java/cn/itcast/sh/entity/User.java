@@ -2,19 +2,12 @@ package cn.itcast.sh.entity;
 
 import javax.persistence.*;
 
-/**
- * User
- * @author LEE.SIU.WAH
- * @email lixiaohua7@163.com
- * @date 2016-2-22 下午4:26:36
- * @version 1.0
- */
-@Entity // 把一个pojo转化成持久化类
-@Table(name="USER_INFO")
+@Entity// Turn a pojo into a persistence class.
+@Table(name="USER_INFO")// Define the name of the table.
 public class User {
-	@Id  // 主键列
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="U_ID")
+	@Id// Primary Key
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="U_ID")// Define the name of the column.
 	private int id;
 	@Column(name="U_NAME", length=50)
 	private String name;
